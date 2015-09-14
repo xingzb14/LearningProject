@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/image">
+        <file>loginwindow.jpg</file>
+        <file>registerwindow.jpg</file>
+        <file>animation.jpg</file>
+        <file>tranWindow.jpg</file>
+        <file>mainWIndow.jpg</file>
+        <file>translateWindow.jpg</file>
+        <file>moreWindow.jpg</file>
+        <file>userWindow.jpg</file>
+        <file>wordManage.jpg</file>
+        <file>phraseWindow.jpg</file>
+    </qresource>
+</RCC>

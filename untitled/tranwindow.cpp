@@ -1,36 +1,35 @@
 #include "tranwindow.h"
-
-tranWindow::tranWindow()
+#include "mainwindow.h"
+tranWindow::tranWindow(QWidget *parent)
 {
     this->resize(270, 480);
     setWindowFlags(Qt::FramelessWindowHint);
     background.setParent(this);
-    background.setStyleSheet("background-color:lightblue");
+    background.setStyleSheet("background:url(:/image/tranWindow.jpg)");
     background.setGeometry(0, 0, this->width(), this->height());
-    topLabel.setParent(this);
-    topLabel.setGeometry(0, 0, this->width(), this->height()/18);
-    topLabel.setStyleSheet("background-color:white");
-    topLabel.setText("过渡界面");
-    topLabel.setAlignment(Qt::AlignCenter);
 
-    classificationLabel.setParent(this);
-    classificationLabel.setGeometry(40, 120, 190, 40);
-    classificationLabel.setText("请输入您的词汇量范围");
+    QStringList bookList;
+    bookList << "日常英语" << "高中词汇" <<" 四级词汇" << "六级词汇" << "托福词汇" << "雅思词汇" << "GRE词汇" << "更多";
+
     classificationBox.setParent(this);
-    classificationBox.setGeometry(40, 170, 190, 35);
+    classificationBox.setGeometry(40, 170, 190, 40);
+    classificationBox.addItems(bookList);
     wordNumberTest.setParent(this);
-    wordNumberTest.setGeometry(50, 270, 170, 50);
-    wordNumberTest.setText("词汇量测试");
-
-    QLabel *label_temp = new QLabel(this);
-    label_temp->setGeometry(40, 220, 190, 40);
-    label_temp->setText("不知道词汇量，请进行测试");
+    wordNumberTest.setGeometry(62, 307, 154, 53);
+    wordNumberTest.setStyleSheet("background-color:transparent");
 
     enterDirectly.setParent(this);
-    enterDirectly.setGeometry(50, 340, 170, 50);
-    enterDirectly.setText("直接进入");
+    enterDirectly.setGeometry(62, 376, 154, 53);
+    enterDirectly.setStyleSheet("background-color:transparent");
+    connect(&enterDirectly, SIGNAL(clicked()), this, SLOT(enterIn()));
 }
-
+//public slots
+void tranWindow::enterIn()
+{
+    mainWindow *mainwindow = new mainWindow();
+    mainwindow->show();
+    this->close();
+}
 
 
 //protected

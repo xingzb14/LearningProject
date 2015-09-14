@@ -1,22 +1,14 @@
-#include "translatewindow.h"
+#include "phrasewindow.h"
 
-translateWindow::translateWindow()
+phraseWindow::phraseWindow()
 {
-    this->resize(270, 480);
-    this->setWindowFlags(Qt::FramelessWindowHint);
-    background.setParent(this);
-    background.setStyleSheet("background:url(:/image/translateWindow.jpg)");
-    textEdit1.setParent(this);
-    textEdit2.setParent(this);
-    textEdit1.setGeometry(33, 80, 205, 120);
-//    textEdit1.setPlaceholderText("在此输入要翻译的文本");
-    textEdit2.setGeometry(33, 275, 205, 120);
-//    textEdit2.setPlaceholderText("翻译结果");
-    translationButton.setParent(this);
-    translationButton.setGeometry(175, 212, 55, 20);
-    translationButton.setStyleSheet("background-color:transparent");
-//    translationButton.setText("翻译");
-
+    this->setMaximumSize(270, 480);
+    this->setMinimumSize(270, 480);
+    setWindowFlags(Qt::FramelessWindowHint);
+    background = new QLabel(this);
+    background->setStyleSheet("background:url(:/image/phraseWindow.jpg)");
+    background->setGeometry(0, 0, this->width(), this->height());
+    //导航栏
     translateButton.setParent(this);
     translateButton.setStyleSheet("background-color:transparent;border:0px groove gray;border-radius:19px;padding:2px 4px");
     phrase.setParent(this);
@@ -33,43 +25,41 @@ translateWindow::translateWindow()
     translateButton.setGeometry(115, 425, 38, 38);
     aboutUser.setGeometry(169, 425, 38, 38);
     more.setGeometry(222, 425, 38, 38);
-//    more.setText("更多");
+
     connect(&wordlearning, SIGNAL(clicked()), this, SLOT(openWordLearning()));
-    connect(&phrase, SIGNAL(clicked()), this, SLOT(openPhraseLearning()));
-//    connect(&translateButton, SIGNAL(clicked()), this, SLOT(openTranslate()));
+    connect(&translateButton, SIGNAL(clicked()), this, SLOT(openTranslate()));
     connect(&aboutUser, SIGNAL(clicked()), this, SLOT(openUser()));
     connect(&more, SIGNAL(clicked()), this, SLOT(openSetting()));
 
 }
+
+phraseWindow::~phraseWindow()
+{
+
+}
 //private slots
-void translateWindow::openWordLearning()
+void phraseWindow::openTranslate()
+{
+    translateWindow *translatewindow = new translateWindow();
+    translatewindow->show();
+    this->close();
+}
+
+void phraseWindow::openWordLearning()
 {
     mainWindow *mainwindow = new mainWindow();
     mainwindow->show();
     this->close();
 }
-
-void translateWindow::openPhraseLearning()
-{
-    phraseWindow *phrasewindow = new phraseWindow();
-    phrasewindow->show();
-    this->close();
-}
-void translateWindow::openUser()
+void phraseWindow::openUser()
 {
     userWindow *userwindow = new userWindow();
     userwindow->show();
     this->close();
 }
-void translateWindow::openSetting()
+void phraseWindow::openSetting()
 {
     moreWindow *morewindow = new moreWindow();
     morewindow->show();
     this->close();
 }
-
-translateWindow::~translateWindow()
-{
-
-}
-

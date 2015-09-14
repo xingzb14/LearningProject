@@ -7,7 +7,7 @@ class tranWindow:public QMainWindow
 {
     Q_OBJECT
 public:
-    tranWindow();
+    tranWindow(QWidget *parent);
 private:
     QLabel background;
     QLabel topLabel;                //顶层标签
@@ -21,5 +21,7 @@ protected:
     void mousePressEvent(QMouseEvent *e);
     void mouseMoveEvent(QMouseEvent *e);
     void mouseReleaseEvent(QMouseEvent *e);
+public slots:
+    void enterIn();
 };
 #endif // TRANWINDOW_H

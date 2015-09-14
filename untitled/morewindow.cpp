@@ -6,46 +6,84 @@ moreWindow::moreWindow()
     setMaximumSize(270, 480);
     setMinimumSize(270, 480);
     setWindowFlags(Qt::FramelessWindowHint);
-    QLabel *background = new QLabel(this);
-    background->setStyleSheet("background-color:lightblue");
+    background = new QLabel(this);
+    background->setStyleSheet("background:url(:/image/moreWindow.jpg)");
     background->setGeometry(0, 0, this->width(), this->height());
-    toplabel = new QLabel(this);
-    toplabel->setGeometry(0, 0, this->width(), this->height()/16);
-    toplabel->setStyleSheet("background-color:white");
-    toplabel->setText("设置界面");
-    toplabel->setAlignment(Qt::AlignCenter);
-    QVBoxLayout *mainlayout = new QVBoxLayout();
-    settingModel = new QPushButton();
-    settingBook = new QLabel();
-    logoffButton = new QPushButton();
-    aboutButton = new QPushButton();
-    BookBox = new QComboBox();
-    settingModel->setText("夜间模式");
-    settingBook->setText("请选择单词等级");
-    QStringList bookList;
+    QStringList bookList, numberList;
     bookList << "日常英语" << "高中词汇" <<" 四级词汇" << "六级词汇" << "托福词汇" << "雅思词汇" << "GRE词汇" << "更多";
+    numberList << "20" << "30" << "50" << "80" << "100" << "120" << "150" << "200" << "250" << "300";
+    BookBox = new QComboBox(this);
+    NumberBox = new QComboBox(this);
     BookBox->addItems(bookList);
-    QHBoxLayout *hlayout = new QHBoxLayout();
-    hlayout->addWidget(settingBook);
-    hlayout->addWidget(BookBox);
-    logoffButton->setText("注销/切换用户");
-    aboutButton->setText("更多信息");
-    QLabel *bottomlabel = new QLabel(this);
-    bottomlabel->setGeometry(0, this->height()-30, this->width(), 30);
-    bottomlabel->setStyleSheet("background-color:white");
-    bottomlabel->setText("这里是底部");
-    bottomlabel->setAlignment(Qt::AlignCenter);
-    mainlayout->addWidget(settingModel);
-    mainlayout->addLayout(hlayout);
-    mainlayout->addWidget(logoffButton);
-    mainlayout->addWidget(aboutButton);
-    mainlayout->insertSpacing(0, 30);
-    mainlayout->insertSpacing(3, 200);
-    mainlayout->insertSpacing(6, 60);
+    NumberBox->addItems(numberList);
+    BookBox->setGeometry(30, 75, 120, 25);
+//    BookBox->setStyleSheet("font-size:30");
+    NumberBox->setGeometry(30, 155, 120, 25);
+//    NumberBox->setStyleSheet("font-size:30");
+    settingBook = new QPushButton(this);
+    settingNumber = new QPushButton(this);
+    logoffButton = new QPushButton(this);
+    aboutButton = new QPushButton(this);
+    settingBook->setGeometry(195, 77, 57, 23);
+    settingBook->setStyleSheet("background-color:transparent");
+    settingNumber->setGeometry(195, 154, 57, 22);
+    settingNumber->setStyleSheet("background-color:transparent");
+    aboutButton->setGeometry(105, 230, 58, 23);
+    logoffButton->setGeometry(105, 308, 58, 23);
+    aboutButton->setStyleSheet("background-color:transparent");
+    logoffButton->setStyleSheet("background-color:transparent");
 
-    this->setLayout(mainlayout);
+    //导航栏
+    translateButton.setParent(this);
+    translateButton.setStyleSheet("background-color:transparent;border:0px groove gray;border-radius:19px;padding:2px 4px");
+    phrase.setParent(this);
+    phrase.setStyleSheet("background-color:transparent;border:0px groove gray;border-radius:19px;padding:2px 4px");
+    wordlearning.setParent(this);
+    wordlearning.setStyleSheet("background-color:transparent;border:0px groove gray;border-radius:19px;padding:2px 4px");
+    aboutUser.setParent(this);
+    aboutUser.setStyleSheet("background-color:transparent;border:0px groove gray;border-radius:19px;padding:2px 4px");
+    more.setParent(this);
+    more.setStyleSheet("background-color:transparent;border:0px groove gray;border-radius:19px;padding:2px 4px");
+
+    wordlearning.setGeometry(7, 425, 38, 38);
+    phrase.setGeometry(61, 425, 38, 38);
+    translateButton.setGeometry(115, 425, 38, 38);
+    aboutUser.setGeometry(169, 425, 38, 38);
+    more.setGeometry(222, 425, 38, 38);
+
+    connect(&wordlearning, SIGNAL(clicked()), this, SLOT(openWordLearning()));
+    connect(&phrase, SIGNAL(clicked()), this, SLOT(openPhraseLearning()));
+    connect(&translateButton, SIGNAL(clicked()), this, SLOT(openTranslate()));
+    connect(&aboutUser, SIGNAL(clicked()), this, SLOT(openUser()));
+//    connect(&more, SIGNAL(clicked()), this, SLOT(openSetting()));
 
 }
+void moreWindow::openWordLearning()
+{
+    mainWindow *mainwindow = new mainWindow();
+    mainwindow->show();
+    this->close();
+}
+
+void moreWindow::openPhraseLearning()
+{
+    phraseWindow *phrasewindow = new phraseWindow();
+    phrasewindow->show();
+    this->close();
+}
+void moreWindow::openUser()
+{
+    userWindow *userwindow = new userWindow();
+    userwindow->show();
+    this->close();
+}
+void moreWindow::openTranslate()
+{
+    translateWindow *translatewindow = new translateWindow();
+    translatewindow->show();
+    this->close();
+}
+
 
 moreWindow::~moreWindow()
 {

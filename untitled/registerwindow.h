@@ -22,7 +22,7 @@ private:
     QComboBox wordNumberBox;
     QPushButton registerButton;
     bool isDifferent;
-
+    QLabel remindLabel;
     QPoint last;
 signals:
     void usernameError();            //用户名错误

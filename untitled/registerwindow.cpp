@@ -1,5 +1,4 @@
 #include "registerwindow.h"
-
 registerWindow::registerWindow(loginWindow *window)
 {
     isDifferent = true;
@@ -7,46 +6,52 @@ registerWindow::registerWindow(loginWindow *window)
     this->resize(270, 480);
     background = new QLabel(this);
     background->setGeometry(0, 0, this->width(), this->height());
-    background->setStyleSheet("background-color:lightblue");
+    background->setStyleSheet("background:url(:/image/registerwindow.jpg)");
     setWindowFlags(Qt::FramelessWindowHint);
 
-    topLabel.setParent(this);
-    topLabel.setGeometry(0, 0, this->width(), this->height()/18);
-    topLabel.setStyleSheet("background-color:white");
-    topLabel.setText("注册界面");
-    topLabel.setAlignment(Qt::AlignCenter);
-
     backButton.setParent(this);
-    backButton.setGeometry(3, 3, 30, 16);
-    backButton.setText("back");
+    backButton.setGeometry(8, 6, 44, 16);
+//    backButton.setText("back");
+    backButton.setStyleSheet("background-color:transparent");
     usernameEdit.setParent(this);
-    usernameEdit.setGeometry(30, 200, 210, 40);
+    usernameEdit.setGeometry(30, 250, 210, 30);
     usernameEdit.setPlaceholderText("在此输入用户名");
     usernameEdit.setAlignment(Qt::AlignCenter);
+    usernameEdit.setStyleSheet("background-color:#dfe1f2;border:2px groove gray;border-radius:5px;padding:2px 4px;");
+
 
     confLabel.setParent(this);
-    confLabel.setGeometry(60, 250, 120,30);
+    confLabel.setGeometry(60, 283, 120,30);
     confLabel.setStyleSheet("background-color:transparent");
     confLabel.setText("确认用户名");
     confLabel.setAlignment(Qt::AlignCenter);
 
     confButton.setParent(this);
-    confButton.setGeometry(180, 250, 60, 30);
+    confButton.setGeometry(180, 285, 60, 30);
     confButton.setText("确认");
+
     pswdEdit.setParent(this);
-    pswdEdit.setGeometry(30, 290, 210, 40);
+    pswdEdit.setGeometry(30, 315, 210, 30);
     pswdEdit.setAlignment(Qt::AlignCenter);
     pswdEdit.setPlaceholderText("在此输入您的密码");
+    pswdEdit.setStyleSheet("background-color:#dfe1f2;border:2px groove gray;border-radius:5px;padding:2px 4px;");
+
 
     pswdEditConf.setParent(this);
-    pswdEditConf.setGeometry(30, 350, 210, 40);
+    pswdEditConf.setGeometry(30, 355, 210, 30);
     pswdEditConf.setPlaceholderText("再次确认您的密码");
     pswdEditConf.setAlignment(Qt::AlignCenter);
+    pswdEditConf.setStyleSheet("background-color:#dfe1f2;border:2px groove gray;border-radius:5px;padding:2px 4px;");
 
     registerButton.setParent(this);
-    registerButton.setGeometry(50, 400, 170, 40);
-    registerButton.setText("点我注册");
+    registerButton.setGeometry(60, 424, 150, 40);
+    registerButton.setStyleSheet("background-color:transparent");
+//    registerButton.setStyleSheet("background-color:#dfe1f2;border:2px groove gray;border-radius:5px;padding:2px 4px;");
 
+    remindLabel.setParent(this);
+    remindLabel.setGeometry(40, 393, 190, 25);
+    remindLabel.setStyleSheet("background-color:transparent;color:red");
+    remindLabel.setAlignment(Qt::AlignCenter);
     connect(&backButton, SIGNAL(clicked()), this, SLOT(close()));
     connect(&backButton, SIGNAL(clicked()), window, SLOT(show()));
     connect(&registerButton, SIGNAL(clicked()), this, SLOT(check()));
@@ -71,16 +76,16 @@ void registerWindow::check()
                 emit success();
                 return;
             }
-            QMessageBox::warning(this, "确认密码", "密码请设置在6位以上！", QMessageBox::Cancel, QMessageBox::Yes);
+            remindLabel.setText("密码请设置在6位以上！");
         }
         else
         {
-            QMessageBox::warning(this, "确认密码", "请确认两次输入的密码一致", QMessageBox::Cancel, QMessageBox::Yes);
+            remindLabel.setText("请确认两次输入的密码一致");
         }
     }
     else
     {
-        QMessageBox::warning(this, "请确认用户名", "请确认您的用户名尚未被注册！",QMessageBox::Cancel,QMessageBox::Yes);
+       remindLabel.setText("请确认您的用户名尚未被注册!");
     }
 }
 

@@ -14,6 +14,7 @@
 
 class newWordManageWindow:public QWidget
 {
+    Q_OBJECT
 public:
     newWordManageWindow();
     ~newWordManageWindow();

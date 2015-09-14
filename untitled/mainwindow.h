@@ -5,7 +5,12 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QLayout>
-#include  <QWidget>
+#include <QWidget>
+#include <QMouseEvent>
+#include "phrasewindow.h"
+#include "translatewindow.h"
+#include "userwindow.h"
+#include "morewindow.h"
 class mainWindow:public QMainWindow
 {
     Q_OBJECT
@@ -16,6 +21,8 @@ private:
     QLabel background;
     QLabel topLabel;
     QLineEdit searchWordEdit;
+    QPushButton searchButton;
+    QLabel meaningLabel;
     QLabel remindLabel;
     QLabel finishedLabel;
     QLabel unfinishedLabel;
@@ -32,6 +39,17 @@ private:
     QPushButton aboutUser;
     QPushButton more;
     QHBoxLayout bottomLayout;
+    QPoint last;
+protected:
+    void mousePressEvent(QMouseEvent *e);
+    void mouseMoveEvent(QMouseEvent *e);
+    void mouseReleaseEvent(QMouseEvent *e);
+private slots:
+    void openTranslate();
+//    void openWordLearning();
+    void openPhraseLearning();
+    void openUser();
+    void openSetting();
 
 };
 

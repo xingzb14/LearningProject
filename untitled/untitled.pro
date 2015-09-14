@@ -15,7 +15,8 @@ SOURCES += \
     newwordmanagewindow.cpp \
     dialog.cpp \
     learningwindow.cpp \
-    morewindow.cpp
+    morewindow.cpp \
+    phrasewindow.cpp
 
 HEADERS += \
     loginwindow.h \
@@ -27,4 +28,10 @@ HEADERS += \
     newwordmanagewindow.h \
     dialog.h \
     learningwindow.h \
-    morewindow.h
+    morewindow.h \
+    phrasewindow.h
+
+RESOURCES += \
+    src.qrc
+
+
