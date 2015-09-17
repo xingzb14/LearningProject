@@ -8,6 +8,15 @@ phraseWindow::phraseWindow()
     background = new QLabel(this);
     background->setStyleSheet("background:url(:/image/phraseWindow.jpg)");
     background->setGeometry(0, 0, this->width(), this->height());
+
+    searchWordEdit.setParent(this);
+    searchWordEdit.setGeometry(70, 5, 130, 25);
+    meaningLabel.setParent(this);
+    meaningLabel.setGeometry(88, 38, 150, 20);
+    meaningLabel.setStyleSheet("background-color:transparent");
+    searchButton.setParent(this);
+    searchButton.setGeometry(210, 5, 20, 20);
+    searchButton.setText("搜索");
     //导航栏
     translateButton.setParent(this);
     translateButton.setStyleSheet("background-color:transparent;border:0px groove gray;border-radius:19px;padding:2px 4px");
@@ -26,11 +35,18 @@ phraseWindow::phraseWindow()
     aboutUser.setGeometry(169, 425, 38, 38);
     more.setGeometry(222, 425, 38, 38);
 
+    learningPharse.setParent(this);
+    learningPharse.setGeometry(32, 360, 95, 38);
+    reviewPhrase.setParent(this);
+    reviewPhrase.setGeometry(145, 360, 93, 38);
+    learningPharse.setStyleSheet("background-color:transparent");
+    reviewPhrase.setStyleSheet("background-color:transparent");
     connect(&wordlearning, SIGNAL(clicked()), this, SLOT(openWordLearning()));
     connect(&translateButton, SIGNAL(clicked()), this, SLOT(openTranslate()));
     connect(&aboutUser, SIGNAL(clicked()), this, SLOT(openUser()));
     connect(&more, SIGNAL(clicked()), this, SLOT(openSetting()));
-
+    connect(&learningPharse, SIGNAL(clicked()), this, SLOT(startLearning()));
+    connect(&reviewPhrase, SIGNAL(clicked()), this, SLOT(startReviewing()));
 }
 
 phraseWindow::~phraseWindow()
@@ -38,6 +54,19 @@ phraseWindow::~phraseWindow()
 
 }
 //private slots
+void phraseWindow::startLearning()  //开始学习
+{
+    singlePhrase *window = new singlePhrase();
+    window->show();
+    this->close();
+}
+void phraseWindow::startReviewing() //复习
+{
+    singlePhrase *window = new singlePhrase();
+    window->show();
+    this->close();
+}
+
 void phraseWindow::openTranslate()
 {
     translateWindow *translatewindow = new translateWindow();

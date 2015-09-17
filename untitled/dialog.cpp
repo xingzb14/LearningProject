@@ -1,12 +1,17 @@
 #include "dialog.h"
-
 dialog::dialog(QWidget *parent)
 {
+    this->resize(260, 180);
+    this->setWindowFlags(Qt::FramelessWindowHint);
+    QLabel *background= new QLabel(this);
+    background->setStyleSheet("background-color:lightblue");
+    background->setGeometry(0, 0, this->width(), this->height());
     QVBoxLayout *layout = new QVBoxLayout();
 //    spellLabel = new QLabel();
 //    meaningLabel = new QLabel();
     spellEdit = new QLineEdit();
     spellEdit->setPlaceholderText("在此输入单词拼写");
+    spellEdit->setFocus();
     meaningEdit =  new QLineEdit();
     meaningEdit->setPlaceholderText("在此输入其释义");
     ensureButton = new QPushButton();
@@ -24,6 +29,13 @@ dialog::dialog(QWidget *parent)
     this->setLayout(layout);
 
     connect(cancelButton, SIGNAL(clicked()), this, SLOT(close()));
+//    connect(ensureButton, SIGNAL(clicked()), this, SLOT(enter()));
+
 }
+//void dialog::enter()
+//{
+//    this->close();
+//    parent->insertWord(spellEdit->text(), meaningEdit->text());
+//}
 
 

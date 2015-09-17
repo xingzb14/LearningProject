@@ -1,5 +1,5 @@
 #include "registerwindow.h"
-registerWindow::registerWindow(loginWindow *window)
+registerWindow::registerWindow(QWidget *window)
 {
     isDifferent = true;
 //    isDifferent = false;

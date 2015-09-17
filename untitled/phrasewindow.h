@@ -8,6 +8,7 @@
 #include "userwindow.h"
 #include "translatewindow.h"
 #include "morewindow.h"
+#include "singlephrase.h"
 class phraseWindow:public QWidget
 {
     Q_OBJECT
@@ -16,7 +17,9 @@ public:
     ~phraseWindow();
 private:
     QLabel *background;
-    QPushButton *search;
+    QLineEdit searchWordEdit;
+    QPushButton searchButton;
+    QLabel meaningLabel;
     QLabel havefinished;        //已完成
     QLabel unfinished;          //未完成
     QLabel todayFinished;       //今天所学
@@ -30,12 +33,21 @@ private:
     QPushButton aboutUser;
     QPushButton more;
 
+public:
+    void setMeaning(QString string) { meaningLabel.setText(string); }
+    void setFinished(QString string) { havefinished.setText(string); }
+    void setUnfinished(QString string) { unfinished.setText(string); }
+    void setTodayStudying(QString string) { todayFinished.setText(string); }
+    void setToReview(QString string) { todaytoReview.setText(string); }
+
 private slots:
     void openTranslate();
     void openWordLearning();
 //    void openPhraseLearning();
     void openUser();
     void openSetting();
+    void startLearning();
+    void startReviewing();
 };
 
 #endif // PHRASEWINDOW_H

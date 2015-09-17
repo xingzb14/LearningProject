@@ -8,11 +8,17 @@
 #include <QMouseEvent>
 #include <QMessageBox>
 #include <QCheckBox>
+#include <QString>
+#include <QDebug>
+#include <iostream>
+#include "loginWindow.h"
+#include <QCoreApplication>
+#include <QPixmap>
+#include <QTime>
+#include "registerwindow.h"
+#include "tranwindow.h"
 
-
-
-
-
+using namespace std;
 class loginWindow:public QMainWindow
 {
     Q_OBJECT
@@ -27,8 +33,11 @@ private:
     QLineEdit passwordEdit;
     QPushButton registerButton;
     QLabel remindLabel;
+    QCheckBox *box;
     QPoint last;
-//    registerWindow registerwindow;      //注册界面
+public:        //接口
+    QString getUserName() { return usernameEdit.text(); } //获取用户名
+    bool isRemember() { return box->checkState();}     //获取是否记住密码的布尔值
 protected:
     void mousePressEvent(QMouseEvent *e);
     void mouseMoveEvent(QMouseEvent *e);
@@ -40,6 +49,10 @@ private slots:
     void showRegisterWindow();          //打开注册界面
     void volidate();    //验证密码
     void showTranWindow();
+    void showdebug()
+    {
+        qDebug() << getUserName();
+    }
 };
 
 #endif // loginWindow_H

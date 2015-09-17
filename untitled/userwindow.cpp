@@ -65,6 +65,7 @@ userWindow::userWindow()
 //    connect(&aboutUser, SIGNAL(clicked()), this, SLOT(openUser()));
     connect(&more, SIGNAL(clicked()), this, SLOT(openSetting()));
 
+    connect(&newWordButton, SIGNAL(clicked()), this, SLOT(openManage()));
 
 
 
@@ -95,6 +96,13 @@ void userWindow::openSetting()
     morewindow->show();
     this->close();
 }
+void userWindow::openManage()
+{
+    newWordManageWindow *managewindow = new newWordManageWindow();
+    managewindow->show();
+    this->close();
+}
+
 userWindow::~userWindow()
 {
 

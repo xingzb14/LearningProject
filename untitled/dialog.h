@@ -9,20 +9,23 @@
 #include <QWidget>
 #include <QDialog>
 #include <QLineEdit>
-#include <QDebug>
-
+#include "dialog.h"
 class dialog:public QDialog
 {
     Q_OBJECT
 public:
     dialog(QWidget *parent);
-private:
-//    QLabel *spellLabel;
+public://    QLabel *spellLabel;
 //    QLabel *meaningLabel;
+//    newWordManageWindow *window;
+    dialog* addDialog;      //*号放到后边 竟然就报错了？ 调了好长时间
     QLineEdit *spellEdit;
     QLineEdit *meaningEdit;
     QPushButton *ensureButton;
     QPushButton *cancelButton;
+public slots:
+//    void enter();
+
 };
 
 #endif // DIALOG_H

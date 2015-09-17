@@ -10,12 +10,20 @@
 //#include "learningwindow.h"
 //#include "morewindow.h"
 //#include "phrasewindow.h"
+#include "singleword.h"
+#include "singlenewword.h"
+#include "newwordsuccess.h"
+#include "phrasesuccess.h"
+#include "singlephrase.h"
 //#include <QTime>
+#include <QString>
+WORD word = {"spell", "translation", "label", "englishMeaning"
+             ,"example", "exampleMeaninglonglonglong"};
+
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-
-    loginWindow window;
+    singlePhrase window;
     QSplashScreen splash(QPixmap(":/image/animation.jpg"));         //以下都是开场动画效果
     splash.setDisabled(true);
     splash.show();

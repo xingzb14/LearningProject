@@ -10,5 +10,11 @@
         <file>userWindow.jpg</file>
         <file>wordManage.jpg</file>
         <file>phraseWindow.jpg</file>
+        <file>newWordFinish.jpg</file>
+        <file>newWordLearning.jpg</file>
+        <file>phraseSuccess.jpg</file>
+        <file>phraseTable.jpg</file>
+        <file>wordSuccess.jpg</file>
+        <file>wordTable.jpg</file>
     </qresource>
 </RCC>

@@ -1,10 +1,4 @@
-#include "loginWindow.h"
-#include <iostream>
-#include <QCoreApplication>
-#include <QPixmap>
-#include <QTime>
-#include "registerwindow.h"
-#include "tranwindow.h"
+#include "loginwindow.h"
 using namespace std;
 
 loginWindow::loginWindow()
@@ -31,7 +25,7 @@ loginWindow::loginWindow()
     passwordEdit.setAlignment(Qt::AlignCenter);
     passwordEdit.setEchoMode(QLineEdit::Password);
     passwordEdit.setMaxLength(20);
-    QCheckBox *box = new QCheckBox(this);
+    box = new QCheckBox(this);
     box->setGeometry(200, 347, 20, 20);
 
 
@@ -45,7 +39,7 @@ loginWindow::loginWindow()
     connect(&loginButton, SIGNAL(clicked()), this, SLOT(volidate()));
     connect(this, SIGNAL(success()), this, SLOT(showTranWindow()));         //这里连错了 应该连过渡界面
     connect(&registerButton, SIGNAL(clicked()), this, SLOT(showRegisterWindow()));
-
+//    connect(&loginButton, SIGNAL(clicked()), this, SLOT(showdebug()));
 }
 
 loginWindow::~loginWindow()

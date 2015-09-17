@@ -1,5 +1,4 @@
 #include "learningwindow.h"
-
 learningWindow::learningWindow()
 {
     resize(270, 480);

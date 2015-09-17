@@ -2,12 +2,13 @@
 #define REGISTERWINDOW_H
 #include <QComboBox>
 #include "loginWindow.h"
+#include "registerwindow.h"
 
 class registerWindow:public QMainWindow
 {
     Q_OBJECT
 public:
-    registerWindow(loginWindow *window);
+    registerWindow(QWidget *window);
     ~registerWindow();
 private:
     QLabel *background;
@@ -24,6 +25,11 @@ private:
     bool isDifferent;
     QLabel remindLabel;
     QPoint last;
+public:                             //接口
+    QString getUsername()   { return usernameEdit.text(); }
+    QString getPassword()    { return pswdEdit.text(); }
+    QString getPasswordConf()   { return pswdEditConf.text(); }
+
 signals:
     void usernameError();            //用户名错误
     void usernameRepeat();           //用户名重复

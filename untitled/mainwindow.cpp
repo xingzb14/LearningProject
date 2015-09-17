@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-#include "translatewindow.h"
 mainWindow::mainWindow()
 {
     this->resize(270, 480);
@@ -54,7 +53,9 @@ mainWindow::mainWindow()
     connect(&translateButton, SIGNAL(clicked()), this, SLOT(openTranslate()));
     connect(&aboutUser, SIGNAL(clicked()), this, SLOT(openUser()));
     connect(&more, SIGNAL(clicked()), this, SLOT(openSetting()));
-
+    connect(&learn, SIGNAL(clicked()), this, SLOT(startLearning()));
+    connect(&noteWordLearning, SIGNAL(clicked()), this, SLOT(startLearningNew()));
+    connect(&review, SIGNAL(clicked()), this, SLOT(startReview()));
 }
 
 mainWindow::~mainWindow()
@@ -62,6 +63,31 @@ mainWindow::~mainWindow()
 
 }
 //private slots
+void mainWindow::startReview()
+{
+    WORD word = {"spell", "translation", "label", "englishMeaning"
+                 ,"example", "exampleMeaninglonglonglong"};
+
+    singleWord *window = new singleWord(word, this);
+    window->show();
+}
+
+void mainWindow::startLearningNew()
+{
+    singleNewword *window = new singleNewword();
+    window->show();
+    this->close();
+}
+
+void mainWindow::startLearning()
+{
+    WORD word = {"spell", "translation", "label", "englishMeaning"
+                 ,"example", "exampleMeaninglonglonglong"};
+
+    singleWord *window = new singleWord(word, this);
+    window->show();
+}
+
 void mainWindow::openTranslate()
 {
     translateWindow *translatewindow = new translateWindow();

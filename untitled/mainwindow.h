@@ -11,6 +11,9 @@
 #include "translatewindow.h"
 #include "userwindow.h"
 #include "morewindow.h"
+#include "mainwindow.h"
+#include "singleword.h"
+#include "singlenewword.h"
 class mainWindow:public QMainWindow
 {
     Q_OBJECT
@@ -40,6 +43,22 @@ private:
     QPushButton more;
     QHBoxLayout bottomLayout;
     QPoint last;
+
+    int wordNumber();
+public:
+    //发送
+    //获取拼写
+    QString getSpell() { return searchWordEdit.text(); }
+
+    //接收
+    void setMeaning(QString string) { meaningLabel.setText(string); }
+    void setRemind(QString string)  { remindLabel.setText(string);  }
+    void setFinished(QString string) { finishedLabel.setText(string); }
+    void setUnfinished(QString string) { unfinishedLabel.setText(string); }
+    void setTodayStudying(QString string) { todayStudying.setText(string); }
+    void setToReview(QString string) { toreviewToday.setText(string); }
+
+
 protected:
     void mousePressEvent(QMouseEvent *e);
     void mouseMoveEvent(QMouseEvent *e);
@@ -50,6 +69,10 @@ private slots:
     void openPhraseLearning();
     void openUser();
     void openSetting();
+
+    void startLearning();
+    void startLearningNew();
+    void startReview();
 
 };
 

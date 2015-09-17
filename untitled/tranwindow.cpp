@@ -1,5 +1,4 @@
 #include "tranwindow.h"
-#include "mainwindow.h"
 tranWindow::tranWindow(QWidget *parent)
 {
     this->resize(270, 480);
@@ -12,7 +11,7 @@ tranWindow::tranWindow(QWidget *parent)
     bookList << "日常英语" << "高中词汇" <<" 四级词汇" << "六级词汇" << "托福词汇" << "雅思词汇" << "GRE词汇" << "更多";
 
     classificationBox.setParent(this);
-    classificationBox.setGeometry(40, 170, 190, 40);
+    classificationBox.setGeometry(40, 170, 190, 25);
     classificationBox.addItems(bookList);
     wordNumberTest.setParent(this);
     wordNumberTest.setGeometry(62, 307, 154, 53);

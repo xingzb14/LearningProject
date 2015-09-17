@@ -4,6 +4,7 @@
 #include <QLayout>
 #include <QPushButton>
 #include <QTextEdit>
+#include "learningwindow.h"
 
 class learningWindow:public QWidget
 {
@@ -21,6 +22,8 @@ private:
     QPushButton *ensure;
     QPushButton *nextButton;
     QPushButton *preButton;
+public:
+
 };
 
 #endif // LEARNINGWINDOW_H

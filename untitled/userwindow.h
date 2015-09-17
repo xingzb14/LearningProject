@@ -9,6 +9,7 @@
 #include "phrasewindow.h"
 #include "translatewindow.h"
 #include "morewindow.h"
+#include "newwordmanagewindow.h"
 class userWindow:public QWidget
 {
     Q_OBJECT
@@ -33,12 +34,21 @@ private:
     QPushButton wordlearning;
     QPushButton aboutUser;
     QPushButton more;
+public:
+    void setLearningTime(QString string) { learningTime.setText(string); }
+    void setHaveWords(QString string) { haveWords.setText(string); }
+    void setHavePhrase(QString string) { havePhrases.setText(string); }
+    void setNewWordNumber(QString string) { newWordNumber.setText(string); }
+    void setCurrentBook(QString string) { currentBook.setText(string); }
+    void setFrequency(QString string) { nowFrequency.setText(string); }
+
 private slots:
     void openTranslate();
     void openWordLearning();
     void openPhraseLearning();
 //    void openUser();
     void openSetting();
+    void openManage();
 };
 
 #endif // USERWINDOW_H

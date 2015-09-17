@@ -1,6 +1,9 @@
 #ifndef TRANWINDOW_H
 #define TRANWINDOW_H
 #include "loginwindow.h"
+#include "mainwindow.h"
+#include "tranwindow.h"
+
 #include "registerwindow.h"
 #include <QComboBox>
 class tranWindow:public QMainWindow
@@ -17,6 +20,9 @@ private:
     QComboBox classificationBox;    //词汇量选框
 
     QPoint last;
+public:
+    QString getClassification() { return classificationBox.currentText(); }
+
 protected:
     void mousePressEvent(QMouseEvent *e);
     void mouseMoveEvent(QMouseEvent *e);

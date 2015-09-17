@@ -1,4 +1,4 @@
-QT       += core gui
+xQT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -16,7 +16,14 @@ SOURCES += \
     dialog.cpp \
     learningwindow.cpp \
     morewindow.cpp \
-    phrasewindow.cpp
+    phrasewindow.cpp \
+    user.cpp \
+    singleword.cpp \
+    singlephrase.cpp \
+    singlenewword.cpp \
+    newwordsuccess.cpp \
+    wordsuccess.cpp \
+    phrasesuccess.cpp
 
 HEADERS += \
     loginwindow.h \
@@ -29,9 +36,15 @@ HEADERS += \
     dialog.h \
     learningwindow.h \
     morewindow.h \
-    phrasewindow.h
+    phrasewindow.h \
+    user.h \
+    singleword.h \
+    singlephrase.h \
+    singlenewword.h \
+    newwordsuccess.h \
+    data.h \
+    wordsuccess.h \
+    phrasesuccess.h
 
 RESOURCES += \
     src.qrc
-
-
