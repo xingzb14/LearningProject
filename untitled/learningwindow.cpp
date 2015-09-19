@@ -1,6 +1,7 @@
 #include "learningwindow.h"
-learningWindow::learningWindow()
+learningWindow::learningWindow(User *user)
 {
+    this->user = user;
     resize(270, 480);
     setMaximumSize(270, 480);
     setMinimumSize(270, 480);

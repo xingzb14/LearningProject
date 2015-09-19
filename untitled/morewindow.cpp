@@ -1,7 +1,7 @@
 #include "morewindow.h"
 using namespace std;
 
-moreWindow::moreWindow()
+moreWindow::moreWindow(User *user):user(user)
 {
     setMaximumSize(270, 480);
     setMinimumSize(270, 480);
@@ -60,20 +60,20 @@ moreWindow::moreWindow()
 }
 void moreWindow::openWordLearning()
 {
-    mainWindow *mainwindow = new mainWindow();
+    mainWindow *mainwindow = new mainWindow(user);
     mainwindow->show();
     this->close();
 }
 
 void moreWindow::openPhraseLearning()
 {
-    phraseWindow *phrasewindow = new phraseWindow();
+    phraseWindow *phrasewindow = new phraseWindow(user);
     phrasewindow->show();
     this->close();
 }
 void moreWindow::openUser()
 {
-    userWindow *userwindow = new userWindow();
+    userWindow *userwindow = new userWindow(user);
     userwindow->show();
     this->close();
 }

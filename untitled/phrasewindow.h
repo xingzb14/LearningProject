@@ -13,9 +13,10 @@ class phraseWindow:public QWidget
 {
     Q_OBJECT
 public:
-    phraseWindow();
+    phraseWindow(User *user);
     ~phraseWindow();
 private:
+    User *user;
     QLabel *background;
     QLineEdit searchWordEdit;
     QPushButton searchButton;

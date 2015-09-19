@@ -1,6 +1,6 @@
 #include "newwordsuccess.h"
 
-newWordSuccess::newWordSuccess(INFO info)
+newWordSuccess::newWordSuccess(INFO info, User *user):user(user)
 {
     this->info = info;
     this->setMaximumSize(270, 480);

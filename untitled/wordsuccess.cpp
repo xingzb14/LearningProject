@@ -1,6 +1,6 @@
 #include "wordsuccess.h"
 
-wordSuccess::wordSuccess()
+wordSuccess::wordSuccess(User *user):user(user)
 {
     this->resize(270, 480);
     this->setWindowFlags(Qt::FramelessWindowHint);
@@ -20,7 +20,7 @@ wordSuccess::wordSuccess()
 
 void wordSuccess::back()
 {
-    mainWindow *window = new mainWindow();
+    mainWindow *window = new mainWindow(user);
     window->show();
     this->close();
 }

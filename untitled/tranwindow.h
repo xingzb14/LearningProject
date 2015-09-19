@@ -3,15 +3,16 @@
 #include "loginwindow.h"
 #include "mainwindow.h"
 #include "tranwindow.h"
-
+#include "user.h"
 #include "registerwindow.h"
 #include <QComboBox>
 class tranWindow:public QMainWindow
 {
     Q_OBJECT
 public:
-    tranWindow(QWidget *parent);
+    tranWindow(QWidget *parent, User *user);
 private:
+    QWidget *parent;
     QLabel background;
     QLabel topLabel;                //顶层标签
     QPushButton wordNumberTest;     //词汇量测试
@@ -24,6 +25,7 @@ public:
     QString getClassification() { return classificationBox.currentText(); }
 
 protected:
+    User *user;
     void mousePressEvent(QMouseEvent *e);
     void mouseMoveEvent(QMouseEvent *e);
     void mouseReleaseEvent(QMouseEvent *e);

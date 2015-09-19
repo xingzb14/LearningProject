@@ -1,5 +1,5 @@
 #include "userwindow.h"
-userWindow::userWindow()
+userWindow::userWindow(User *user):user(user)
 {
     this->resize(270, 480);
     this->setWindowFlags(Qt::FramelessWindowHint);
@@ -73,26 +73,26 @@ userWindow::userWindow()
 //private slots
 void userWindow::openTranslate()
 {
-    translateWindow *translatewindow = new translateWindow();
+    translateWindow *translatewindow = new translateWindow(user);
     translatewindow->show();
     this->close();
 }
 
 void userWindow::openPhraseLearning()
 {
-    phraseWindow *phrasewindow = new phraseWindow();
+    phraseWindow *phrasewindow = new phraseWindow(user);
     phrasewindow->show();
     this->close();
 }
 void userWindow::openWordLearning()
 {
-    mainWindow *wordlearning = new mainWindow();
+    mainWindow *wordlearning = new mainWindow(user);
     wordlearning->show();
     this->close();
 }
 void userWindow::openSetting()
 {
-    moreWindow *morewindow = new moreWindow();
+    moreWindow *morewindow = new moreWindow(user);
     morewindow->show();
     this->close();
 }

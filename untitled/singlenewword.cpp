@@ -4,7 +4,7 @@ OPTION test[3] = {{"apple", "苹果", "香蕉", "梨", "桃子", 0},
 {"peach", "苹果", "香蕉", "梨", "桃子", 2}};
 const int count = 3;
 INFO info = {1,2,3,4};
-singleNewword::singleNewword()
+singleNewword::singleNewword(User *user):user(user)
 {
     this->setMaximumSize(270, 480);
     this->setMinimumSize(270, 480);
@@ -47,7 +47,7 @@ singleNewword::singleNewword()
 
 void singleNewword::back()
 {
-    mainWindow *window = new mainWindow();
+    mainWindow *window = new mainWindow(user);
     window->show();
     this->close();
 }

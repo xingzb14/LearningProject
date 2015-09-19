@@ -10,13 +10,15 @@
 #include "translatewindow.h"
 #include "morewindow.h"
 #include "newwordmanagewindow.h"
+#include "user.h"
 class userWindow:public QWidget
 {
     Q_OBJECT
 public:
-    userWindow();
+    userWindow(User *user);
     ~userWindow();
 private:
+    User *user;
     QLabel background;
     QLabel usernameLabel;
     //一系列用户信息

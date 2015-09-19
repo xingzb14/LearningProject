@@ -1,6 +1,6 @@
 #include "singlephrase.h"
 
-singlePhrase::singlePhrase()
+singlePhrase::singlePhrase():user(user)
 {
     index = 0;
     resize(270, 480);
@@ -54,7 +54,7 @@ singlePhrase::singlePhrase()
 }
 void singlePhrase::back()
 {
-    phraseWindow *window = new phraseWindow();
+    phraseWindow *window = new phraseWindow(user);
     window->show();
     this->close();
 }
@@ -63,7 +63,7 @@ void singlePhrase::remember()
 {
     if(!setInfo(phrase))
     {
-        phraseSuccess *window = new phraseSuccess();
+        phraseSuccess *window = new phraseSuccess(user);
         window->show();
         this->close();
     }
@@ -72,7 +72,7 @@ void singlePhrase::notRemember()
 {
     if(!setInfo(phrase))
     {
-        phraseSuccess *window = new phraseSuccess();
+        phraseSuccess *window = new phraseSuccess(user);
         window->show();
         this->close();
     }

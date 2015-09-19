@@ -11,9 +11,10 @@ class newWordSuccess:public QWidget
 {
     Q_OBJECT
 public:
-    newWordSuccess(INFO info);
+    newWordSuccess(INFO info, User *user);
     ~newWordSuccess();
 private:
+    User *user;
     INFO info;
     QLabel *background;
     QLabel *sum;

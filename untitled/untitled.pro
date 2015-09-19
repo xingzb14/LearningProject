@@ -1,9 +1,14 @@
-xQT       += core gui
+QT       += core gui network concurrent multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-QT     +=    opengl
+QT       += sql
 
+QT     +=    opengl
+TARGET = BaiduTranslationDemo
+TEMPLATE = app
+
+CONFIG += c++11
 SOURCES += \
     main.cpp \
     loginwindow.cpp \
@@ -23,7 +28,14 @@ SOURCES += \
     singlenewword.cpp \
     newwordsuccess.cpp \
     wordsuccess.cpp \
-    phrasesuccess.cpp
+    phrasesuccess.cpp \
+    userdata.cpp \
+    Net.cpp \
+    Trans.cpp \
+    about.cpp \
+    newword.cpp \
+    phrase.cpp \
+    words.cpp
 
 HEADERS += \
     loginwindow.h \
@@ -44,7 +56,15 @@ HEADERS += \
     newwordsuccess.h \
     data.h \
     wordsuccess.h \
-    phrasesuccess.h
+    phrasesuccess.h \
+    userdata.h \
+    Net.h \
+    Trans.h \
+    about.h \
+    CONNECTION.h \
+    newword.h \
+    phrase.h \
+    words.h
 
 RESOURCES += \
     src.qrc

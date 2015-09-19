@@ -3,13 +3,16 @@
 #include "mainwindow.h"
 #include <QWidget>
 #include <QTextEdit>
+#include "Trans.h"
 class translateWindow:public QMainWindow
 {
     Q_OBJECT
 public:
-    translateWindow();
+    translateWindow(User *user);
     ~translateWindow();
 private:
+    User *user;
+    Qt_Translation::BaiduTranslation m_translation;
     QLabel background;
     QTextEdit textEdit1;
     QTextEdit textEdit2;
@@ -25,6 +28,7 @@ private slots:
     void openPhraseLearning();
     void openUser();
     void openSetting();
+    void translate();
 };
 
 #endif // TRANSLATEWINDOW_H

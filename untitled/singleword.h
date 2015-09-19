@@ -11,8 +11,9 @@ class singleWord:public QWidget
 {
     Q_OBJECT
 public:
-    singleWord(WORD word, QWidget *parent);
+    singleWord(WORD word, QWidget *parent, User *user);
 private:
+    User *user;
     QWidget *parent;
     WORD word;
     QPushButton *backButton;

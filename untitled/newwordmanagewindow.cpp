@@ -1,10 +1,12 @@
 #include "newwordmanagewindow.h"
 
-int row = 13;
-int column = 3;
-int newWordManageWindow::count = 0;
-newWordManageWindow::newWordManageWindow()
+//int newWordManageWindow::newWordList.size() = 0;
+newWordManageWindow::newWordManageWindow(User *user):user(user)
 {
+    row = 13;
+    column = 3;
+    currentPage = 1;
+    TotalPages = newWordList.size()/row+1;
     this->setMaximumSize(270, 480);
     this->setMinimumSize(270, 480);
     this->setWindowFlags(Qt::FramelessWindowHint);
@@ -30,7 +32,21 @@ newWordManageWindow::newWordManageWindow()
     QHeaderView *headerview = tableWidget->verticalHeader();
     headerview->setHidden(true);
     tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    QTableWidgetItem *item1, *item2, *item3;
+    for(int i=0; i<row; i++)
+    {
+            item1 = new QTableWidgetItem("");
+            item2 = new QTableWidgetItem("");
+            item3 = new QTableWidgetItem("");
+            item1->setTextAlignment(Qt::AlignCenter);
+            item2->setTextAlignment(Qt::AlignCenter);
+            item3->setTextAlignment(Qt::AlignCenter);
 
+            tableWidget->setItem(i, 0, item1);
+            tableWidget->setItem(i, 1, item2);
+            tableWidget->setItem(i, 2, item3);
+
+    }
     remindLabel = new QLabel(this);
     addButton = new QPushButton(this);
     deleteButton = new QPushButton(this);
@@ -53,19 +69,71 @@ newWordManageWindow::newWordManageWindow()
     nextButton->setStyleSheet("background-color:transparent");
     backButton->setStyleSheet("background-color:transparent");
     addDialog = new dialog(this);
+    pageLabel = new QLabel(this);
+    pageLabel->setGeometry(32, 410, 100, 40);
+    QString string1 = QString::number(currentPage);
+    QString string2 = QString::number(TotalPages);
+    QString string = string1 + "/" + string2;
+    pageLabel->setText(string);
     connect(addButton, SIGNAL(clicked()), addDialog, SLOT(show()));
     connect(addDialog->ensureButton, SIGNAL(clicked()), this, SLOT(add()));
     connect(addDialog->ensureButton, SIGNAL(clicked()), this, SLOT(clear()));
     connect(deleteButton, SIGNAL(clicked()), this, SLOT(deleteRow()));
     connect(backButton, SIGNAL(clicked()), this, SLOT(back()));
+    connect(preButton, SIGNAL(clicked()), this, SLOT(prePage()));
+    connect(nextButton, SIGNAL(clicked()), this, SLOT(nextPage()));
 
 }
 //public
-void newWordManageWindow::deleteRow()
+void newWordManageWindow::update()
 {
-    int currentRow = tableWidget->currentRow();
-    deleteWord(currentRow);
+
+    TotalPages = newWordList.size()/row+1;       //更新页数  且要更新内容
+    qDebug() << TotalPages << currentPage;
+    if(newWordList.size()!=0)
+    {
+        if(currentPage == TotalPages)
+        {
+            for(int i=0; i<row; i++)
+            {
+                if(i<newWordList.size()%row)
+                {
+                    tableWidget->item(i, 0)->setText(newWordList[(currentPage-1)*row+i].spell);
+                    tableWidget->item(i, 1)->setText(newWordList[(currentPage-1)*row+i].meaning);
+                    tableWidget->item(i, 2)->setText(newWordList[(currentPage-1)*row+i].addTime);
+                }
+                else
+                {
+                    tableWidget->item(i, 0)->setText("");
+                    tableWidget->item(i, 1)->setText("");
+                    tableWidget->item(i, 2)->setText("");
+
+                }
+            }
+        }
+        else
+        {
+            for(int i=0; i<row; i++)
+            {
+                tableWidget->item(i, 0)->setText(newWordList[(currentPage-1)*row+i].spell);
+                tableWidget->item(i, 1)->setText(newWordList[(currentPage-1)*row+i].meaning);
+                tableWidget->item(i, 2)->setText(newWordList[(currentPage-1)*row+i].addTime);
+            }
+        }
+    }
+    else
+    {
+
+        tableWidget->clearContents();
+    }
+    setNum(newWordList.size());
+    QString string1 = QString::number(currentPage);
+    QString string2 = QString::number(TotalPages);
+    QString string = string1 + "/" +string2;
+    pageLabel->setText(string);
 }
+
+
 
 void newWordManageWindow::add()
 {
@@ -83,69 +151,77 @@ void newWordManageWindow::clear()
 
 void newWordManageWindow::insertWord(QString spell, QString meaning)
 {
-    bool repeated = false;
-    for(int i=0; i<count; i++)
+    QDialog *dialog = new QDialog(addDialog);
+    dialog->setWindowTitle("重复");
+    dialog->resize(200, 110);
+    QLabel *label = new QLabel(dialog);
+    QLabel *labelText = new QLabel(dialog);
+    label->setStyleSheet("background-color:lightblue");
+    labelText->setAlignment(Qt::AlignCenter);
+    labelText->setGeometry(30, 0, 140, 70);
+    label->setGeometry(0, 0, this->width(), this->height());
+    QPushButton *yesButton = new QPushButton(dialog);
+    yesButton->setGeometry(140, 70, 55, 20);
+    yesButton->setText("返回");
+    yesButton->setStyleSheet("color:black");
+    bool fail = false;
+    if(spell.size()==0)
     {
-        if(tableWidget->item(i, 0)->text()==spell)
-        {
-            QDialog *dialog = new QDialog(addDialog);
-            dialog->setWindowTitle("重复");
-            dialog->resize(200, 110);
-            QLabel *label = new QLabel(dialog);
-            QLabel *labelText = new QLabel(dialog);
-            label->setStyleSheet("background-color:lightblue");
-            labelText->setText("您已经添加过这个生词了");
-            labelText->setAlignment(Qt::AlignCenter);
-            labelText->setGeometry(30, 0, 140, 70);
-            label->setGeometry(0, 0, this->width(), this->height());
-            QPushButton *yesButton = new QPushButton(dialog);
-            yesButton->setGeometry(140, 70, 55, 20);
-            yesButton->setText("返回");
-            yesButton->setStyleSheet("color:black");
-            dialog->show();
-            connect(yesButton,SIGNAL(clicked()), dialog, SLOT(close()));
-            repeated = true;
-            break;
-        }
+        labelText->setText("单词不能为空！");
+        fail = true;
     }
-    if(repeated == false)
+    else if(meaning.size()==0)
     {
-    QTableWidgetItem *item1 = new QTableWidgetItem(spell);
-    QTableWidgetItem *item2 = new QTableWidgetItem(meaning);
-    item1->setTextAlignment(Qt::AlignCenter);
-    item2->setTextAlignment(Qt::AlignCenter);
-    tableWidget->setItem(count, 0, item1);
-    tableWidget->setItem(count, 1, item2);
-    QDateTime sysTime = QDateTime::currentDateTime();
-    QStringList list = sysTime.toString("yyyy-MM-dd").split('-');
-    QString time = list[0]+list[1]+list[2];
-    tableWidget->setItem(count, 2, new QTableWidgetItem(time));
-    count++;
-    setNum(count);
+        labelText->setText("释义不能为空！");
+        fail = true;
+
+    }
+    for(int i=0; i<newWordList.size(); i++)
+    {    
+        if(newWordList[i].spell==spell)
+        {
+            labelText->setText("您已经添加过这个生词了！");
+
+        }
+        fail = true;
+        break;
+
+    }
+    if(fail)
+    {
+        dialog->show();
+        connect(yesButton,SIGNAL(clicked()), dialog, SLOT(close()));
+
+    }
+    if(!fail)
+    {
+        QDateTime sysTime = QDateTime::currentDateTime();
+        QStringList list = sysTime.toString("yyyy-MM-dd").split('-');
+        QString time = list[0]+list[1]+list[2];
+        NEWWORD newword = { meaning, spell, time };
+        newWordList.push_front(newword);
+        qDebug() << currentPage << " " << TotalPages;
+        update();
     }
 
 }
-void newWordManageWindow::deleteWord(int row)
+void newWordManageWindow::deleteRow()
 {
-    qDebug() << tableWidget->currentRow();
-    if(tableWidget->isItemSelected(tableWidget->currentItem()))
+    if(newWordList.size()!=0)
     {
-        if(count==0)
-        qDebug() << "no ";
-    else
+        int index = tableWidget->currentRow();
+        for(int i=0; i<newWordList.size(); i++)
         {
-            QList<QTableWidgetItem *> deleteItem = tableWidget->selectedItems();
-            deleteItem.clear();
-            tableWidget->removeRow(row);
-            count--;
+            if(tableWidget->item(index, 0)->text()==newWordList[i].spell)
+            {
 
+                newWordList.remove(i);
+                qDebug() << newWordList.size();
+                update();
+                break;
+            }
         }
     }
-    else
-    {
-        qDebug() << "select";
-    }
-    setNum(count);
 
 }
 
@@ -157,9 +233,30 @@ void newWordManageWindow::setNum(int number)
 }
 
 //private slots
+void newWordManageWindow::prePage()
+{
+    if(currentPage == 1)
+        return;
+    else
+    {
+        currentPage--;
+        update();
+    }
+}
+void newWordManageWindow::nextPage()
+{
+    if(currentPage == TotalPages)
+        return;
+    else
+    {
+        currentPage++;
+        update();
+    }
+}
+
 void newWordManageWindow::back()
 {
-    userWindow *backwindow = new userWindow();
+    userWindow *backwindow = new userWindow(user);
     backwindow->show();
     this->close();
 }

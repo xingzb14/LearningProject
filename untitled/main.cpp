@@ -23,7 +23,7 @@ WORD word = {"spell", "translation", "label", "englishMeaning"
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    singlePhrase window;
+    loginWindow window;
     QSplashScreen splash(QPixmap(":/image/animation.jpg"));         //以下都是开场动画效果
     splash.setDisabled(true);
     splash.show();

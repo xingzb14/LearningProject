@@ -1,6 +1,6 @@
 #include "phrasewindow.h"
 
-phraseWindow::phraseWindow()
+phraseWindow::phraseWindow(User *user):user(user)
 {
     this->setMaximumSize(270, 480);
     this->setMinimumSize(270, 480);
@@ -69,26 +69,26 @@ void phraseWindow::startReviewing() //复习
 
 void phraseWindow::openTranslate()
 {
-    translateWindow *translatewindow = new translateWindow();
+    translateWindow *translatewindow = new translateWindow(user);
     translatewindow->show();
     this->close();
 }
 
 void phraseWindow::openWordLearning()
 {
-    mainWindow *mainwindow = new mainWindow();
+    mainWindow *mainwindow = new mainWindow(user);
     mainwindow->show();
     this->close();
 }
 void phraseWindow::openUser()
 {
-    userWindow *userwindow = new userWindow();
+    userWindow *userwindow = new userWindow(user);
     userwindow->show();
     this->close();
 }
 void phraseWindow::openSetting()
 {
-    moreWindow *morewindow = new moreWindow();
+    moreWindow *morewindow = new moreWindow(user);
     morewindow->show();
     this->close();
 }

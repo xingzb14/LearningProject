@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-mainWindow::mainWindow()
+mainWindow::mainWindow(User *user):user(user)
 {
     this->resize(270, 480);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -90,26 +90,26 @@ void mainWindow::startLearning()
 
 void mainWindow::openTranslate()
 {
-    translateWindow *translatewindow = new translateWindow();
+    translateWindow *translatewindow = new translateWindow(user);
     translatewindow->show();
     this->close();
 }
 
 void mainWindow::openPhraseLearning()
 {
-    phraseWindow *phrasewindow = new phraseWindow();
+    phraseWindow *phrasewindow = new phraseWindow(user);
     phrasewindow->show();
     this->close();
 }
 void mainWindow::openUser()
 {
-    userWindow *userwindow = new userWindow();
+    userWindow *userwindow = new userWindow(user);
     userwindow->show();
     this->close();
 }
 void mainWindow::openSetting()
 {
-    moreWindow *morewindow = new moreWindow();
+    moreWindow *morewindow = new moreWindow(user);
     morewindow->show();
     this->close();
 }

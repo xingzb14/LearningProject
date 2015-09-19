@@ -5,14 +5,15 @@
 #include <QPushButton>
 #include <QTextEdit>
 #include "learningwindow.h"
-
+#include "user.h"
 class learningWindow:public QWidget
 {
     Q_OBJECT
 public:
-    learningWindow();
+    learningWindow(User *user);
     ~learningWindow();
 private:
+    User *user;
     QLabel *toplabel;
     QPushButton *backbutton;
     QLabel *wordLabel;           //单词拼写

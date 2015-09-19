@@ -17,7 +17,7 @@
 #include <QTime>
 #include "registerwindow.h"
 #include "tranwindow.h"
-
+#include "user.h"
 using namespace std;
 class loginWindow:public QMainWindow
 {
@@ -26,6 +26,7 @@ public:
     loginWindow();
     ~loginWindow();
 private:
+    User *user;
     QLabel backGround;
     QPushButton backButton;
     QPushButton loginButton;

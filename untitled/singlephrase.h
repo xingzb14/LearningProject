@@ -10,9 +10,10 @@ class singlePhrase:public QWidget
 {
     Q_OBJECT
 public:
-    singlePhrase();
+    singlePhrase(User *user);
     ~singlePhrase();
 private:
+    User *user;
     QLabel *background;
     QLabel *phrase1;
     QLabel *phrase2;

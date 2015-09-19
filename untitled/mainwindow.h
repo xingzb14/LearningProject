@@ -14,11 +14,12 @@
 #include "mainwindow.h"
 #include "singleword.h"
 #include "singlenewword.h"
+#include "user.h"
 class mainWindow:public QMainWindow
 {
     Q_OBJECT
 public:
-    mainWindow();
+    mainWindow(User *user);
     ~mainWindow();
 private:
     QLabel background;
@@ -48,6 +49,8 @@ private:
 public:
     //发送
     //获取拼写
+    User *user;
+
     QString getSpell() { return searchWordEdit.text(); }
 
     //接收
@@ -60,6 +63,7 @@ public:
 
 
 protected:
+
     void mousePressEvent(QMouseEvent *e);
     void mouseMoveEvent(QMouseEvent *e);
     void mouseReleaseEvent(QMouseEvent *e);

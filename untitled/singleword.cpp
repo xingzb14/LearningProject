@@ -1,11 +1,10 @@
 #include "singleword.h"
 
 const int count = 4;
-singleWord::singleWord(WORD word, QWidget *parent)
+singleWord::singleWord(WORD word, QWidget *parent, User *user):user(user), parent(parent)
 {
     this->word = word;
     index = 0;
-    this->parent = parent;
     this->setMaximumSize(270, 480);
     this->setMinimumSize(270, 480);
     this->setWindowFlags(Qt::FramelessWindowHint);
@@ -99,7 +98,7 @@ void singleWord::remember()
     }
     else
     {
-        wordSuccess *window = new wordSuccess();
+        wordSuccess *window = new wordSuccess(user);
         window->show();
         this->close();
     }
@@ -113,7 +112,7 @@ void singleWord::addNew()
     }
     else
     {
-        wordSuccess *window = new wordSuccess();
+        wordSuccess *window = new wordSuccess(user);
         window->show();
         this->close();
     }
@@ -127,7 +126,7 @@ void singleWord::notRemember()
     }
     else
     {
-        wordSuccess *window = new wordSuccess();
+        wordSuccess *window = new wordSuccess(user);
         window->show();
         this->close();
     }

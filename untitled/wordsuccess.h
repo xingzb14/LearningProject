@@ -9,8 +9,9 @@ class wordSuccess:public QWidget
 {
     Q_OBJECT
 public:
-    wordSuccess();
+    wordSuccess(User *user);
 private:
+    User *user;
     QLabel *background;
     QPushButton *backButton;
     QPushButton *topBackButton;

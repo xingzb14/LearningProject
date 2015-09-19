@@ -23,9 +23,10 @@ class moreWindow:public QWidget
 {
     Q_OBJECT
 public:
-    moreWindow();
+    moreWindow(User *user);
     ~moreWindow();
 private:
+    User *user;
     QLabel *background;
     QPushButton *settingBook;        //设置单词书
     QComboBox *BookBox;         //单词书下拉框

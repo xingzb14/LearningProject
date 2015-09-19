@@ -36,7 +36,8 @@ enum BOOK
     TOEFL,
     IELTS,
     GRE,
-    MORE
+    MORE,
+    DEFAULT
 };
 
 #endif // DATA

@@ -27,9 +27,10 @@ class singleNewword:public QWidget
 {
     Q_OBJECT
 public:
-    singleNewword();
+    singleNewword(User *user);
     ~singleNewword();
 private:
+    User *user;
     QLabel *background;
     QLabel *spellLabel;
     QLabel *remindLabel;

@@ -1,5 +1,5 @@
 #include "tranwindow.h"
-tranWindow::tranWindow(QWidget *parent)
+tranWindow::tranWindow(QWidget *parent, User *user):user(user), parent(parent)
 {
     this->resize(270, 480);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -25,7 +25,9 @@ tranWindow::tranWindow(QWidget *parent)
 //public slots
 void tranWindow::enterIn()
 {
-    mainWindow *mainwindow = new mainWindow();
+    mainWindow *mainwindow = new mainWindow(user);
+    mainwindow->user->setBook(classificationBox.currentText());
+    qDebug() << mainwindow->user->getBook();
     mainwindow->show();
     this->close();
 }

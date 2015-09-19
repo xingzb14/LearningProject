@@ -1,7 +1,8 @@
 #include "translatewindow.h"
 
-translateWindow::translateWindow()
+translateWindow::translateWindow(User *user):m_translation("p88oR9EfpmxefbsSjwgRwOxG")
 {
+    this->user = user;
     this->resize(270, 480);
     this->setWindowFlags(Qt::FramelessWindowHint);
     background.setParent(this);
@@ -12,6 +13,8 @@ translateWindow::translateWindow()
 //    textEdit1.setPlaceholderText("在此输入要翻译的文本");
     textEdit2.setGeometry(33, 275, 205, 120);
 //    textEdit2.setPlaceholderText("翻译结果");
+    textEdit1.setStyleSheet("background-color:#dfe1f2;border:2px groove gray;border-radius:5px;padding:2px 4px;");
+    textEdit2.setStyleSheet("background-color:#dfe1f2;border:2px groove gray;border-radius:5px;padding:2px 4px;");
     translationButton.setParent(this);
     translationButton.setGeometry(175, 212, 55, 20);
     translationButton.setStyleSheet("background-color:transparent");
@@ -39,33 +42,46 @@ translateWindow::translateWindow()
 //    connect(&translateButton, SIGNAL(clicked()), this, SLOT(openTranslate()));
     connect(&aboutUser, SIGNAL(clicked()), this, SLOT(openUser()));
     connect(&more, SIGNAL(clicked()), this, SLOT(openSetting()));
+    connect(&translationButton, SIGNAL(clicked()), this, SLOT(translate()));
 
 }
 //private slots
 void translateWindow::openWordLearning()
 {
-    mainWindow *mainwindow = new mainWindow();
+    mainWindow *mainwindow = new mainWindow(user);
     mainwindow->show();
     this->close();
 }
 
 void translateWindow::openPhraseLearning()
 {
-    phraseWindow *phrasewindow = new phraseWindow();
+    phraseWindow *phrasewindow = new phraseWindow(user);
     phrasewindow->show();
     this->close();
 }
 void translateWindow::openUser()
 {
-    userWindow *userwindow = new userWindow();
+    userWindow *userwindow = new userWindow(user);
     userwindow->show();
     this->close();
 }
 void translateWindow::openSetting()
 {
-    moreWindow *morewindow = new moreWindow();
+    moreWindow *morewindow = new moreWindow(user);
     morewindow->show();
     this->close();
+}
+void translateWindow::translate()
+{
+    auto data = m_translation.translation(textEdit1.toPlainText());
+    if(data.first)
+    {
+        textEdit2.setText(data.second);
+    }
+    else
+    {
+        textEdit2.setText("Error");
+    }
 }
 
 translateWindow::~translateWindow()

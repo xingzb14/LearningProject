@@ -40,6 +40,7 @@ loginWindow::loginWindow()
     connect(this, SIGNAL(success()), this, SLOT(showTranWindow()));         //这里连错了 应该连过渡界面
     connect(&registerButton, SIGNAL(clicked()), this, SLOT(showRegisterWindow()));
 //    connect(&loginButton, SIGNAL(clicked()), this, SLOT(showdebug()));
+
 }
 
 loginWindow::~loginWindow()
@@ -50,7 +51,7 @@ loginWindow::~loginWindow()
 //private slots
 void loginWindow::showTranWindow()
 {
-    tranWindow *tranwindow = new tranWindow(this);
+    tranWindow *tranwindow = new tranWindow(this, user);
     tranwindow->show();
     this->close();
 
@@ -64,8 +65,18 @@ void loginWindow::showRegisterWindow()
 }
 void loginWindow::volidate()
 {
-    if(usernameEdit.text() == passwordEdit.text())      //实际上应该在数据库中验证
+    //寻找数据库中对用usernameEdit得到密码
+    if(usernameEdit.text() == passwordEdit.text())
+    {   //实际上应该在数据库中验证
+        user = new User(usernameEdit.text(), 0);   //完成用户绑定
         emit success();
+        user->update();
+        QDateTime currentTime = QDateTime::currentDateTime();
+        user->addDateTime(currentTime);
+    }
+
+    //
+
 }
 
 //protected
